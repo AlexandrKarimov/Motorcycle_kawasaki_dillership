@@ -3,9 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Kawasaki Dealership - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    
+    <div class="wrapper">
+        <header class="container">
+            <span class="logo">KAWASAKI</span>
+            <nav>
+                <ul>
+                    <li class="active"><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('motorcycles_page') }}">Motorcycles</a></li>
+                    <li><a href="{{ url_for('cart_page') }}">Cart</a></li>
+                    <li><a href="{{ url_for('contact_page') }}">Contact us</a></li>
+                    <li class="btn"><a href="{{ url_for('login_page') }}">Log in</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="hero container">
+            <div class="hero--info">
+                <h2>THE BEST</h2>
+                <h1>MOTORCYCLE</h1>
+                <p>Welcome to the world of Kawasaki! This is where your story of freedom, precision engineering, and pure thrill begins.</p>
+                <button class="btn"><a href="{{ url_for('motorcycles_page') }}">Motorcycles</a></button>
+            </div>
+            <img src="{{ url_for('static', filename='img/kawasaki_logo.png') }}" alt="Logo">
+        </div> 
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <h3>KAWASAKI</h3>
+                    <p>Let the good times roll. Experience the thrill of the ride.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Models</h4>
+                        <ul>
+                            <li><a href="{{ url_for('motorcycles_page') }}">Ninja</a></li>
+                            <li><a href="{{ url_for('motorcycles_page') }}">Z Series</a></li>
+                            <li><a href="{{ url_for('motorcycles_page') }}">Vulcan</a></li>
+                            <li><a href="{{ url_for('motorcycles_page') }}">Versys</a></li>
+                            <li><a href="{{ url_for('motorcycles_page') }}">KX Series</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="{{ url_for('service_centers_page') }}">Service Centers</a></li>
+                            <li><a href="{{ url_for('owners_manuals_page') }}">Owner's Manuals</a></li>
+                            <li><a href="{{ url_for('warranty_page') }}">Warranty</a></li>
+                            <li><a href="{{ url_for('financing_page') }}">Financing</a></li>
+                            <li><a href="{{ url_for('faq_page') }}">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="{{ url_for('about_page') }}">About Us</a></li>
+                            <li><a href="{{ url_for('careers_page') }}">Careers</a></li>
+                            <li><a href="{{ url_for('news_events_page') }}">News & Events</a></li>
+                            <li><a href="{{ url_for('rider_academy_page') }}">Rider Academy</a></li>
+                            <li><a href="{{ url_for('contact_page') }}">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-social">
+                        <h4>Follow Us</h4>
+                        <div class="social-icons">
+                            <a href="{{ url_for('under_construction_page') }}" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg>
+                            </a>
+                            <a href="{{ url_for('under_construction_page') }}" aria-label="Facebook">
+                                <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            </a>
+                            <a href="{{ url_for('under_construction_page') }}" aria-label="Twitter">
+                                <svg viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 0021.968-9.491c0-.212-.005-.425-.015-.636A10.025 10.025 0 0024 4.557z"/></svg>
+                            </a>
+                            <a href="{{ url_for('under_construction_page') }}" aria-label="YouTube">
+                                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.376.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.376-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    &copy; 2024 Kawasaki Motors. All rights reserved.
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="{{ url_for('under_construction_page') }}">Privacy Policy</a>
+                    <a href="{{ url_for('under_construction_page') }}">Terms of Use</a>
+                    <a href="{{ url_for('under_construction_page') }}">Cookie Settings</a>
+                    <a href="{{ url_for('under_construction_page') }}">Imprint</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme-switcher.js') }}"></script>
 </body>
 </html>
