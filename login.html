@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Kawasaki Dealership</title>
+    <!-- Пути через Flask -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animated-input.css') }}">
+</head>
+<body>
+    <main>
+        <div class="circle"></div>
+        <div class="login-form-container">
+            <h1 class="form-title">Log in</h1>
+            
+            <!-- Вывод ошибок/успеха от Flask -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- ОБЯЗАТЕЛЬНО: форма с method и action -->
+            <form method="POST" action="{{ url_for('login_page') }}">
+                <div class="form-fields">
+                    <!-- ОБЯЗАТЕЛЬНО: name совпадает с request.form.get() в app.py -->
+                    <div class="form-field">
+                        <input type="text" name="username" placeholder="Username" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="password" name="password" placeholder="Password" required>
+                    </div>
+                </div>
+                
+                <div class="forgot-password">
+                    <!-- Пока ставим заглушку, добавим роут позже -->
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+                
+                <div class="form_buttons">
+                    <!-- type="submit" обязательно -->
+                    <button type="submit" class="button">Log in</button>
+                </div>
+            </form>
+            
+            <div class="register-link">
+                <p>Haven't account? <a href="{{ url_for('register_page') }}">Registration</a></p>
+            </div>
+        </div>
+    </main>
+    
+        <!-- Скрипты через Flask -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme-switcher.js') }}"></script>
+    
+    <!-- Скрипт для обработки формы входа -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault(); // Отменяем стандартную отправку
+                
+                const username = form.querySelector('input[name="username"]').value;
+                const password = form.querySelector('input[name="password"]').value;
+                
+                try {
+                    const response = await fetch('/api/auth/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ username, password })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        // Сохраняем токен и имя пользователя
+                        localStorage.setItem('token', data.token);
+                        localStorage.setItem('username', data.username);
+                        
+                        // Показываем сообщение и переходим на главную
+                        alert('Вход выполнен!');
+                        window.location.href = '/';
+                    } else {
+                        alert(data.error || 'Ошибка входа');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Сервер недоступен');
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - Kawasaki Dealership</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+</head>
+<body>
+    <main>
+        <div class="register-form-container">
+            <h1 class="form-title">Registration</h1>
+            
+            <!-- Сообщения от сервера -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- Форма регистрации -->
+            <form id="registerForm">
+                <div class="form-fields">
+                    <div class="form-field">
+                        <input type="text" name="username" placeholder="Username" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="password" name="password" placeholder="Password" required>
+                    </div>
+                </div>
+                <div class="form_buttons">
+                    <button type="submit" class="button">Register</button>
+                </div>
+            </form>
+            
+            <div class="register-link">
+                <!-- Исправлено: url_for('login_page') вместо 'login' -->
+                <p>Already have an account? <a href="{{ url_for('login_page') }}">Log in</a></p>
+            </div>
+        </div>
+    </main>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <!-- Скрипт обработки регистрации -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('registerForm');
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault(); // Отменяем стандартную отправку
+                
+                const username = form.querySelector('input[name="username"]').value;
+                const email = form.querySelector('input[name="email"]').value;
+                const password = form.querySelector('input[name="password"]').value;
+                
+                try {
+                    // Отправляем на правильный API-эндпоинт
+                    const response = await fetch('/api/auth/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, email, password })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        alert('Регистрация успешна! Теперь войдите.');
+                        // Перенаправляем на страницу входа
+                        window.location.href = '{{ url_for("login_page") }}';
+                    } else {
+                        alert(data.error || 'Ошибка регистрации');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Сервер недоступен');
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>
