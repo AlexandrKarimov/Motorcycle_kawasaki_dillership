@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard | Kawasaki</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/acc.css') }}">
+</head>
+<body>
+<div class="wrapper">
+    <header class="container">
+        <span class="logo">KAWASAKI</span>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('motorcycles_page') }}">Motorcycles</a></li>
+                <li><a href="{{ url_for('cart_page') }}">Cart</a></li>
+                <li><a href="{{ url_for('contact_page') }}">Contact us</a></li>
+                <li class="user-menu">
+                    <span class="user-name">{{ user.user_name }}</span>
+                    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="dashboard-container container">
+        <div class="dashboard-header">
+            <h2>WELCOME BACK</h2>
+            <h1>MY DASHBOARD</h1>
+        </div>
+        <div class="welcome-banner">
+            <div class="welcome-text">
+                <h3>{{ user.user_name }}</h3>
+                <p>Member since {{ user.created_at.strftime('%B %Y') if user.created_at else '2024' }}</p>
+            </div>
+            <div class="welcome-stats">
+                <div class="stat-item"><span class="stat-value">{{ orders_count }}</span><span class="stat-label">ORDERS</span></div>
+                <div class="stat-item"><span class="stat-value">2</span><span class="stat-label">WISHLIST</span></div>
+                <div class="stat-item"><span class="stat-value">1</span><span class="stat-label">REVIEWS</span></div>
+            </div>
+        </div>
+
+        <!-- Dashboard Tabs -->
+        <div class="dashboard-tabs">
+            <button class="tab-btn active" data-tab="profile">PROFILE</button>
+            <button class="tab-btn" data-tab="orders">MY ORDERS</button>
+            <button class="tab-btn" data-tab="wishlist">WISHLIST</button>
+            <button class="tab-btn" data-tab="settings">SETTINGS</button>
+        </div>
+
+        <!-- Profile Tab -->
+        <div class="tab-content active" id="profile-tab">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar">{{ user.user_name[:2].upper() }}</div>
+                    <div class="profile-title">
+                        <h3>{{ user.user_name }}</h3>
+                        <p>Premium Member</p>
+                    </div>
+                </div>
+                <div class="profile-info-grid">
+                    <div class="info-row">
+                        <span class="info-label">FULL NAME</span>
+                        <span class="info-value">{{ user.user_name }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">EMAIL</span>
+                        <span class="info-value">{{ user.email }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">MEMBER SINCE</span>
+                        <span class="info-value">{{ user.created_at.strftime('%B %d, %Y') if user.created_at else 'January 15, 2024' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div class="tab-content" id="settings-tab">
+            <div class="settings-card">
+                <form method="POST" action="{{ url_for('update_profile') }}">
+                    <div class="settings-group">
+                        <h3>Account Information</h3>
+                        <div class="settings-field">
+                            <label>USERNAME</label>
+                            <input type="text" id="settingsUserName" name="user_name" value="{{ user.user_name }}" required>
+                        </div>
+                        <div class="settings-field">
+                            <label>EMAIL ADDRESS</label>
+                            <input type="email" id="settingsEmail" name="email" value="{{ user.email }}" required>
+                        </div>
+                    </div>
+                    <div class="settings-group">
+                        <h3>Change Password</h3>
+                        <div class="settings-field">
+                            <label>CURRENT PASSWORD</label>
+                            <input type="password" name="current_password" placeholder="Enter current password">
+                        </div>
+                        <div class="settings-field">
+                            <label>NEW PASSWORD</label>
+                            <input type="password" name="new_password" placeholder="Enter new password">
+                        </div>
+                        <div class="settings-field">
+                            <label>CONFIRM NEW PASSWORD</label>
+                            <input type="password" name="confirm_password" placeholder="Confirm new password">
+                        </div>
+                    </div>
+                    <button type="submit" class="save-settings-btn">SAVE CHANGES</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/acc.js') }}"></script>
+</body>
+</html>
