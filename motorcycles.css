@@ -1,0 +1,708 @@
+/* motorcycles.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 16px;
+    background-color: #c6d4ef;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.wrapper {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    background: linear-gradient(135deg, #1a2a3a 0%, #0d1b2a 100%);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.wrapper.page-loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(72,129,101,0.15) 0%, rgba(0,0,0,0) 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    padding: 0 20px;
+}
+
+header {
+    padding: 40px 0;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+header .logo {
+    text-transform: uppercase;
+    font-size: 29px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff 0%, #488165 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 2px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 30px;
+}
+
+header nav ul li {
+    display: inline-block;
+    position: relative;
+}
+
+header nav ul li a {
+    color: #ffffff;
+    transition: all 300ms ease;
+    font-weight: 500;
+}
+
+header nav ul li.active::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 5px;
+    background: #488165;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+header nav ul li:not(.active):not(.btn):not(.theme-switcher-item) a:hover {
+    border-bottom: 5px solid #488165;
+    padding-bottom: 5px;
+}
+
+header nav ul li.btn a {
+    background: #488165;
+    padding: 8px 20px;
+    border-radius: 30px;
+    transition: all 500ms ease;
+    font-weight: 600;
+}
+
+header nav ul li.btn a:hover {
+    background: #335a47;
+    transform: scale(1.05);
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.page-header h2 {
+    color: #488165;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
+
+.page-header h1 {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #fff 0%, #c6d4ef 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.controls-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    background: rgba(255,255,255,0.05);
+    padding: 15px 25px;
+    border-radius: 60px;
+    backdrop-filter: blur(8px);
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    flex: 2;
+    min-width: 250px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 12px 20px;
+    border-radius: 50px;
+    border: none;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.search-box input:focus {
+    background: rgba(255,255,255,0.25);
+    border: 1px solid #488165;
+}
+
+.search-box button, .filter-btn {
+    background: #488165;
+    border: none;
+    width: 44px;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 18px;
+}
+
+.search-box button:hover {
+    background: #335a47;
+    transform: scale(1.02);
+}
+
+.sort-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.sort-box label {
+    font-weight: 500;
+    color: #a0b0c0;
+}
+
+.filter-select {
+    padding: 10px 20px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 40px;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+}
+
+.hierarchy-nav {
+    background: rgba(0,0,0,0.3);
+    border-radius: 28px;
+    padding: 20px 25px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.hierarchy-level {
+    flex: 1;
+    min-width: 180px;
+}
+
+.hierarchy-level h4 {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #488165;
+    margin-bottom: 12px;
+}
+
+.hierarchy-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.h-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    border-radius: 40px;
+    color: #e0e0e0;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.h-btn:hover {
+    background: rgba(72,129,101,0.4);
+    border-color: #488165;
+}
+
+.h-btn.active {
+    background: #488165;
+    color: white;
+    border-color: #488165;
+    box-shadow: 0 2px 8px rgba(72,129,101,0.4);
+}
+
+.hidden {
+    display: none;
+}
+
+.results-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-size: 15px;
+}
+
+.results-info span {
+    color: #488165;
+    font-weight: 800;
+    font-size: 24px;
+    margin-right: 8px;
+}
+
+.reset-btn-small {
+    background: transparent;
+    border: 1px solid #488165;
+    padding: 6px 16px;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 12px;
+}
+
+.reset-btn-small:hover {
+    background: rgba(72,129,101,0.2);
+}
+
+.motorcycles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.moto-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 24px;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.moto-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 20px 30px -12px rgba(0,0,0,0.4);
+}
+
+.moto-img {
+    height: 220px;
+    overflow: hidden;
+    background: #0a1118;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.moto-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.moto-card:hover .moto-img img {
+    transform: scale(1.05);
+}
+
+.moto-info {
+    padding: 20px;
+}
+
+.moto-info h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.moto-series {
+    color: #488165;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.moto-price {
+    font-size: 24px;
+    font-weight: 800;
+    color: #488165;
+    margin: 8px 0;
+}
+
+.moto-year {
+    font-size: 14px;
+    color: #a0b0c0;
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    padding: 4px 12px;
+    border-radius: 50px;
+}
+
+.add-to-cart-card {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px 0;
+    background: linear-gradient(135deg, #488165 0%, #3a6b52 100%);
+    border: none;
+    border-radius: 40px;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.add-to-cart-card i {
+    font-size: 14px;
+    transition: transform 0.2s ease;
+}
+
+.add-to-cart-card:hover {
+    background: linear-gradient(135deg, #3a6b52 0%, #2c523e 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(72,129,101,0.3);
+}
+
+.add-to-cart-card:active {
+    transform: translateY(1px);
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 60px;
+    grid-column: 1 / -1;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(72,129,101,0.3);
+    border-top-color: #488165;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+
+.pagination-container button {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 10px 18px;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pagination-container button.active {
+    background: #488165;
+    border-color: #488165;
+}
+
+.pagination-container button:hover:not(:disabled) {
+    background: #488165;
+    transform: scale(1.05);
+}
+
+.pagination-container button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 40px;
+    margin: 30px 0;
+}
+
+.empty-icon {
+    font-size: 80px;
+    color: #488165;
+    margin-bottom: 20px;
+    opacity: 0.6;
+}
+
+.reset-btn-large {
+    background: #488165;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 50px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.2s;
+}
+
+.reset-btn-large:hover {
+    background: #335a47;
+    transform: scale(1.02);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1e2f3c, #0f1a24);
+    max-width: 700px;
+    width: 90%;
+    border-radius: 32px;
+    animation: fadeUp 0.3s ease;
+    position: relative;
+    padding: 25px;
+}
+
+@keyframes fadeUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-modal {
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    font-size: 36px;
+    cursor: pointer;
+    color: #aaa;
+    transition: 0.2s;
+    z-index: 10;
+}
+
+.close-modal:hover {
+    color: #488165;
+}
+
+.modal-detail {
+    text-align: center;
+}
+
+.modal-detail img {
+    max-height: 280px;
+    margin: 0 auto;
+    border-radius: 20px;
+    object-fit: contain;
+    background: #00000030;
+}
+
+.modal-price {
+    font-size: 36px;
+    color: #488165;
+    font-weight: 800;
+    margin: 15px 0;
+}
+
+.modal-specs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    background: rgba(0,0,0,0.3);
+    padding: 20px;
+    border-radius: 24px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed rgba(255,255,255,0.1);
+    padding: 6px 0;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.close-modal-btn {
+    padding: 14px 32px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50px;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-modal-btn:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+}
+
+.close-modal-btn:active {
+    transform: translateY(1px);
+}
+
+.add-to-cart-modal {
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #488165 0%, #3a6b52 100%);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-to-cart-modal i {
+    font-size: 14px;
+    transition: transform 0.2s ease;
+}
+
+.add-to-cart-modal:hover {
+    background: linear-gradient(135deg, #3a6b52 0%, #2c523e 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(72,129,101,0.3);
+}
+
+.add-to-cart-modal:active {
+    transform: translateY(1px);
+}
+
+body.theme-light {
+    background: #f0f4fa;
+    color: #1a2a3a;
+}
+
+body.theme-light .wrapper {
+    background: linear-gradient(135deg, #f0f4fa 0%, #dce3ef 100%);
+}
+
+body.theme-light .moto-card, body.theme-light .controls-bar, body.theme-light .hierarchy-nav {
+    background: rgba(0,0,0,0.03);
+    backdrop-filter: none;
+}
+
+body.theme-light .filter-select, body.theme-light .search-box input {
+    background: white;
+    color: #1a2a3a;
+    border: 1px solid #ccc;
+}
+
+body.theme-light .h-btn {
+    background: #eef2f7;
+    color: #1f2a3e;
+}
+
+body.theme-light .results-info {
+    color: #2c3e50;
+}
+
+body.theme-light .modal-content {
+    background: linear-gradient(135deg, #ffffff, #e8edf5);
+    color: #1a2a3a;
+}
+
+body.theme-light .modal-specs-grid {
+    background: rgba(0,0,0,0.05);
+}
+
+body.theme-light .close-modal-btn {
+    background: rgba(0,0,0,0.05);
+    border-color: rgba(0,0,0,0.1);
+    color: #1a2a3a;
+}
+
+body.theme-light .close-modal-btn:hover {
+    background: rgba(0,0,0,0.1);
+}
+
+body.theme-light .add-to-cart-card,
+body.theme-light .add-to-cart-modal {
+    background: linear-gradient(135deg, #488165 0%, #3a6b52 100%);
+    color: white;
+}

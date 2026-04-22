@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Motorcycles | Kawasaki</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/motorcycles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="container">
+            <span class="logo">KAWASAKI</span>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li class="active"><a href="{{ url_for('motorcycles_page') }}">Motorcycles</a></li>
+                    <li><a href="{{ url_for('cart_page') }}">Cart</a></li>
+                    <li><a href="{{ url_for('contact_page') }}">Contact us</a></li>
+                    <li class="btn"><a href="{{ url_for('login_page') }}">Log in</a></li>
+                    <li class="theme-switcher-item">
+                        <button id="themeToggle" class="theme-toggle-btn" aria-label="Switch theme">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="motorcycles-container container">
+            <div class="page-header">
+                <h2>RIDE THE LEGEND</h2>
+                <h1>OUR MOTORCYCLES</h1>
+                <p>Discover our complete lineup of precision-engineered machines.</p>
+            </div>
+            <div class="controls-bar">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search by name, series, category...">
+                    <button id="searchBtn" class="filter-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="sort-box">
+                    <label><i class="fas fa-sort-amount-down-alt"></i> Sort:</label>
+                    <select id="sortSelect" class="filter-select">
+                        <option value="name-asc">Name A-Z</option>
+                        <option value="name-desc">Name Z-A</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                        <option value="year-desc">Newest First</option>
+                    </select>
+                </div>
+            </div>
+            <div class="hierarchy-nav">
+                <div class="hierarchy-level" id="level-groups">
+                    <h4><i class="fas fa-layer-group"></i> TYPE</h4>
+                    <div class="hierarchy-options" id="groupsList">
+                    </div>
+                </div>
+                <div class="hierarchy-level hidden" id="level-series">
+                    <h4><i class="fas fa-list-ul"></i> MODEL SERIES</h4>
+                    <div class="hierarchy-options" id="seriesList">
+                    </div>
+                </div>
+                <div class="hierarchy-level hidden" id="level-categories">
+                    <h4><i class="fas fa-tag"></i> CATEGORY</h4>
+                    <div class="hierarchy-options" id="categoriesList">
+                    </div>
+                </div>
+            </div>
+            <div class="results-info">
+                <span id="resultsCount">0</span> motorcycles found
+                <button id="resetAllBtn" class="reset-btn-small"><i class="fas fa-undo-alt"></i> Reset filters</button>
+            </div>
+            <div class="motorcycles-grid" id="motorcyclesGrid">
+                <div class="loading-spinner"><div class="spinner"></div><p>Loading masterpieces...</p></div>
+            </div>
+            <div class="pagination-container" id="pagination"></div>
+            <div class="empty-state" id="emptyState" style="display:none;">
+                <div class="empty-icon"><i class="fas fa-motorcycle"></i></div>
+                <h3>No motorcycles found</h3>
+                <p>Try adjusting your filters or search term</p>
+                <button id="resetEmptyBtn" class="reset-btn-large">VIEW ALL MOTORCYCLES</button>
+            </div>
+        </div>
+    </div>
+    <div id="motoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/motorcycles.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme-switcher.js') }}"></script>
+</body>
+</html>
